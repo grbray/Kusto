@@ -1,0 +1,7 @@
+// This will parse the domain name from the Perf table
+Perf
+| distinct Computer
+| extend SplitName = split(Computer, '.')
+| extend SlicedArr = array_slice(SplitName,1, array_length(SplitName))
+| extend DomainName = strcat_array(SlicedArr, ".")
+| distinct DomainName
